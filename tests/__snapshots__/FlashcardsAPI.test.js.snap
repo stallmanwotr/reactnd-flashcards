@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add a new deck (v2) 1`] = `Object {}`;
+
+exports[`Add a new deck 1`] = `Object {}`;
+
+exports[`Simple Jest test 1`] = `
+Object {
+  "hello": "world",
+}
+`;

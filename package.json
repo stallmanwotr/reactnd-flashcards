@@ -1,26 +1,29 @@
 {
-  "name": "reactnd-flashcards",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "react-native-scripts": "1.14.0",
-    "jest-expo": "~27.0.0",
-    "react-test-renderer": "16.3.1"
-  },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
-  "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
-    "test": "jest"
-  },
-  "jest": {
-    "preset": "jest-expo"
-  },
-  "dependencies": {
-    "expo": "^27.0.1",
-    "react": "16.3.1",
-    "react-native": "~0.55.2"
-  }
+    "name": "reactnd-flashcards",
+    "version": "0.1.0",
+    "private": true,
+    "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+    "dependencies": {
+        "expo": "^27.0.1",
+        "react": "16.3.1",
+        "react-native": "~0.55.2",
+        "react-redux": "^5.0.7",
+        "redux": "^4.0.0",
+        "redux-thunk": "^2.2.0"
+    },
+    "devDependencies": {
+        "jest-expo": "~27.0.0",
+        "react-native-scripts": "1.14.0",
+        "react-test-renderer": "16.3.1"
+    },
+    "jest": {
+        "preset": "jest-expo"
+    },
+    "scripts": {
+        "start": "react-native-scripts start",
+        "eject": "react-native-scripts eject",
+        "android": "react-native-scripts android",
+        "ios": "react-native-scripts ios",
+        "test": "jest"
+    }
 }
