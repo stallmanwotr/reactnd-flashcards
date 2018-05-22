@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 /**
  * Summary of an individual deck.
@@ -9,22 +9,28 @@ class DeckListItem extends Component {
 
     static propTypes = {
         /** The deck object to be rendered. */
-        deck: PropTypes.object.isRequired
+        deck: PropTypes.object.isRequired,
+
+        /** Handler: When the user selects this deck item. */
+        onPressItem: PropTypes.func
     }
 
     render() {
-        const { deck } = this.props;
+        const { deck, onPressItem } = this.props;
         const { title, questions } = deck;
 
         return (
-            <View style={styles.item}>
-                <Text style={styles.header}>
-                    {title}
-                </Text>
-                <Text  style={styles.subHeader}>
-                    {questions.length} cards
-                </Text>
-            </View>
+            <TouchableOpacity
+                onPress={() => { if (onPressItem) { onPressItem(deck); }}} >
+                <View style={styles.item}>
+                    <Text style={styles.header}>
+                        {title}
+                    </Text>
+                    <Text  style={styles.subHeader}>
+                        {questions.length} cards
+                    </Text>
+                </View>
+            </TouchableOpacity>
         );
     }
 }

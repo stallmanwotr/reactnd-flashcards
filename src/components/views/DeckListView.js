@@ -24,23 +24,45 @@ class DeckListView extends Component {
         dispatch(getDecks());
     }
 
-    _onPressItem(id) {
-        console.info('onPressItem(id): ' + id);
+    /**
+     * Handler: The user selects an individual deck, navigate to the deck view.
+     */
+    _onPressItem(deck) {
+        console.info('DeckListView._onPressItem: ' + JSON.stringify(deck));
+        const { navigation } = this.props;
+        const deckProps = { deck };
+
+        navigation.push('IndividualDeckView', deckProps)
     }
 
-    // Example:
-    // {"item":{"title":"React, Redux and React Native","questions":[]},"index":5,"separators":{}}
+    /*
+     * @param item The FlatList item that contains the individual deck (destructured).
+     * Example:
+     * {
+     *     "item": {
+     *         "title": "React, Redux and React Native",
+     *         "questions":[]
+     *     },
+     *     "index": 5,
+     *     "separators":{}
+     * }
+     */
     _renderItem({ item }) {
+        const { navigation } = this.props;
+        const deckProps = { deck: item };
         return (
-            <DeckListItem
-                deck={item}
-                onPressItem={this._onPressItem}
-            />
+            <View>
+                <DeckListItem
+                    deck={item}
+                    onPressItem={this._onPressItem.bind(this)}
+                />
+            </View>
         );
     }
 
     render() {
-        const { decks } = this.props;
+        const { decks, navigation } = this.props;
+        console.info('DeckListView.navigation: ' + (typeof navigation));
 
         return (
             <View>
@@ -48,7 +70,7 @@ class DeckListView extends Component {
                     data={Object.values(decks)}
                     extraData={this.state}
                     keyExtractor={(deck) => deck.title}
-                    renderItem={this._renderItem}
+                    renderItem={this._renderItem.bind(this)}
                 />
             </View>
         );
@@ -56,3 +78,4 @@ class DeckListView extends Component {
 }
 
 export default connect(mapStateToProps)(DeckListView);
+
