@@ -34,7 +34,6 @@ function mapStateToProps({ decks }, ownProps) {
     };
 }
 
-
 /**
  * A view that shows an individual deck.
  *   The _deck title_ can be passed as a prop, or instead by navigating and passing
@@ -61,7 +60,7 @@ class IndividualDeckView extends Component {
         console.info('Start Quiz');
         const { deck, navigation } = this.props;
 
-        navigation.push('StartQuizView', { deck });
+        navigation.push('QuizView', { title: deck.title });
     }
 
     render() {

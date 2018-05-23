@@ -2,8 +2,8 @@ import * as FlashcardsAPI from './api/FlashcardsAPI';
 
 // TODO: write as unit test
 export function testFlashcardsAPI() {
-    const card1 = { question: 'Question 1?', answer: 'Answer 1' };
-    const card2 = { question: 'Question 2?', answer: 'Answer 2' };
+    const card1 = { question: 'Question 1?', answer: 'Answer 1!' };
+    const card2 = { question: 'Question 2?', answer: 'Answer 2!' };
 
     FlashcardsAPI.clearDecks().then(() => {
         console.info('Cleared decks.');
