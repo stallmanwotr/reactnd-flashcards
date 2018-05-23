@@ -11,16 +11,6 @@ function mapStateToProps({ decks }) {
     };
 }
 
-function AddDeckButton({ onPress }) {
-    return (
-        <TouchableOpacity
-            style={styles.button}
-            onPress={onPress} >
-            <Text style={styles.buttonText}>Add Deck</Text>
-        </TouchableOpacity>
-    );
-}
-
 /**
  * Lists all decks. Each deck includes the title and card count.
  */
@@ -41,16 +31,6 @@ class DeckListView extends Component {
         const { navigation } = this.props;
 
         navigation.push('IndividualDeckView', { title: deck.title })
-    }
-
-    /**
-     * The user wants to add a new deck, navigate to that page.
-     */
-    _onAddDeck() {
-        console.info('Add Deck');
-        const { navigation } = this.props;
-        
-        navigation.push('NewDeckView')
     }
 
     /*
@@ -83,7 +63,6 @@ class DeckListView extends Component {
 
         return (
             <View>
-                <AddDeckButton onPress={this._onAddDeck.bind(this)} />
                 <FlatList
                     data={Object.values(decks)}
                     extraData={this.state}

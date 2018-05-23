@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 import * as TestData from './src/TestData';
-import RootStackNavigator from './src/components/RootStackNavigator';
+import RootTabNavigator from './src/components/RootTabNavigator';
 import store from './src/store';
 
 
@@ -18,7 +18,7 @@ export default class App extends React.Component {
             <Provider store={store} >
                 <View style={styles.container}>
                     <Text>Flashcards! v5</Text>
-                    <RootStackNavigator />
+                    <RootTabNavigator />
                 </View>
             </Provider>
         );
