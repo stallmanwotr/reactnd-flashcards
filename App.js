@@ -1,10 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Constants } from 'expo';
 import * as TestData from './src/TestData';
 import RootTabNavigator from './src/components/RootTabNavigator';
 import store from './src/store';
 
+function AppStatusBar({backgroundColor, ...props}) {
+    return (
+        <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+            <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+        </View>
+    );
+}
 
 export default class App extends React.Component {
 
@@ -17,7 +25,7 @@ export default class App extends React.Component {
         return (
             <Provider store={store} >
                 <View style={styles.container}>
-                    <Text>Flashcards! v5</Text>
+                    <AppStatusBar backgroundColor={'orange'} barStyle="light-content" />
                     <RootTabNavigator />
                 </View>
             </Provider>
