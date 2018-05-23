@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 import DeckListView from './views/DeckListView';
 import IndividualDeckView from './views/IndividualDeckView';
+import NewCardView from './views/NewCardView';
 import NewDeckView from './views/NewDeckView';
 
 /**
@@ -18,8 +19,7 @@ export default createStackNavigator(
     IndividualDeckView: {
         screen: IndividualDeckView,
         navigationOptions: ({ navigation }) => {
-            const { deck } = navigation.state.params;
-            const { title } = deck;
+            const { title } = navigation.state.params;
             return {
                 title: `Deck: ${title}`
             };
@@ -30,6 +30,13 @@ export default createStackNavigator(
         screen: NewDeckView,
         navigationOptions: {
             title: 'New Deck'
+        }
+    },
+
+    NewCardView: {
+        screen: NewCardView,
+        navigationOptions: {
+            title: 'Add Card'
         }
     }
 },

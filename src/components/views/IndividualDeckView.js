@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component} from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 function AddCardButton({ onPress }) {
@@ -22,29 +23,49 @@ function StartQuizButton({ onPress }) {
     );
 }
 
+// Map the app state to component props.
+function mapStateToProps({ decks }, ownProps) {
+    // the deck title can be passed in either by navigation or props.
+    const { navigation } = ownProps;
+    const title = ownProps.title || navigation.state.params.title;
+
+    return {
+        deck: decks[title]
+    };
+}
+
+
 /**
  * A view that shows an individual deck.
- *   The _deck_ object can be passed as a prop, or instead by navigating and passing
+ *   The _deck title_ can be passed as a prop, or instead by navigating and passing
  * the deck as parameter.
  */
 class IndividualDeckView extends Component {
 
     static propTypes = {
-        /** The deck object to be rendered. (Normally passed by navigation param.) */
-        deck: PropTypes.object
+        /** The deck title. (Normally passed by navigation param.) */
+        title: PropTypes.string
     }
 
+    /**
+     * The user wants to add a new card, navigate to that page.
+     */
     _onAddCard() {
         console.info('Add Card');
+        const { deck, navigation } = this.props;
+
+        navigation.push('NewCardView', { deck });
     }
 
     _onStartQuiz() {
         console.info('Start Quiz');
+        const { deck, navigation } = this.props;
+
+        navigation.push('StartQuizView', { deck });
     }
 
     render() {
-        const { navigation } = this.props;
-        const deck = this.props.deck || navigation.state.params.deck;
+        const { deck } = this.props;
         const { title, questions } = deck;
 
         return (
@@ -57,9 +78,9 @@ class IndividualDeckView extends Component {
                 </Text>
             
                 <View style={styles.buttonContainer}>
-                    <AddCardButton onPress={this._onAddCard} />
+                    <AddCardButton onPress={this._onAddCard.bind(this)} />
 
-                    <StartQuizButton onPress={this._onStartQuiz} />
+                    <StartQuizButton onPress={this._onStartQuiz.bind(this)} />
                 </View>
             </View>
         );
@@ -123,7 +144,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default IndividualDeckView;
+export default connect(mapStateToProps)(IndividualDeckView);
 
 
 

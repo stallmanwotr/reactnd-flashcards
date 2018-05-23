@@ -39,9 +39,8 @@ class DeckListView extends Component {
     _onSelectDeck(deck) {
         console.info('Select Deck');
         const { navigation } = this.props;
-        const deckProps = { deck };
 
-        navigation.push('IndividualDeckView', deckProps)
+        navigation.push('IndividualDeckView', { title: deck.title })
     }
 
     /**
@@ -81,7 +80,6 @@ class DeckListView extends Component {
 
     render() {
         const { decks, navigation } = this.props;
-        console.info('DeckListView.navigation: ' + (typeof navigation));
 
         return (
             <View>
