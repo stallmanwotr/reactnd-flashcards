@@ -1,15 +1,24 @@
 import React, { Component} from 'react';
-import { FlatList, Text, View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux'
-import { getDecks } from '../../actions/DeckActions'
-import DeckListItem from './DeckListItem'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
+import { getDecks } from '../../actions/DeckActions';
+import DeckListItem from './DeckListItem';
 
 // Map the app state to component props.
 function mapStateToProps({ decks }) {
-    console.info('DeckListView.mapStateToProps\n'+ JSON.stringify(decks));
     return {
         decks
     };
+}
+
+function AddDeckButton({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={styles.button}
+            onPress={onPress} >
+            <Text style={styles.buttonText}>Add Deck</Text>
+        </TouchableOpacity>
+    );
 }
 
 /**
@@ -25,14 +34,24 @@ class DeckListView extends Component {
     }
 
     /**
-     * Handler: The user selects an individual deck, navigate to the deck view.
+     * The user selects an individual deck, navigate to the individual deck view.
      */
-    _onPressItem(deck) {
-        console.info('DeckListView._onPressItem: ' + JSON.stringify(deck));
+    _onSelectDeck(deck) {
+        console.info('Select Deck');
         const { navigation } = this.props;
         const deckProps = { deck };
 
         navigation.push('IndividualDeckView', deckProps)
+    }
+
+    /**
+     * The user wants to add a new deck, navigate to that page.
+     */
+    _onAddDeck() {
+        console.info('Add Deck');
+        const { navigation } = this.props;
+        
+        navigation.push('NewDeckView')
     }
 
     /*
@@ -54,7 +73,7 @@ class DeckListView extends Component {
             <View>
                 <DeckListItem
                     deck={item}
-                    onPressItem={this._onPressItem.bind(this)}
+                    onPressItem={this._onSelectDeck.bind(this)}
                 />
             </View>
         );
@@ -66,7 +85,8 @@ class DeckListView extends Component {
 
         return (
             <View>
-               <FlatList
+                <AddDeckButton onPress={this._onAddDeck.bind(this)} />
+                <FlatList
                     data={Object.values(decks)}
                     extraData={this.state}
                     keyExtractor={(deck) => deck.title}
@@ -76,6 +96,30 @@ class DeckListView extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: 'orange',
+        borderColor: 'darkorange',
+        borderWidth: 1,
+        marginTop: 5,
+        marginBottom: 5,
+        padding: 10,
+        paddingLeft: 30,
+        paddingRight: 30,
+        height: 45,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
+
+    buttonText: {
+        color: 'white',
+        fontSize: 22,
+        textAlign: 'center',
+    }
+});
 
 export default connect(mapStateToProps)(DeckListView);
 
