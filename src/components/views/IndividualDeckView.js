@@ -1,6 +1,26 @@
 import PropTypes from 'prop-types';
 import React, { Component} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+function AddCardButton({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={styles.button}
+            onPress={onPress} >
+            <Text style={styles.buttonText}>Add Card</Text>
+        </TouchableOpacity>
+    );
+}
+
+function StartQuizButton({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={styles.button}
+            onPress={onPress} >
+            <Text style={styles.buttonText}>Start Quiz</Text>
+        </TouchableOpacity>
+    );
+}
 
 /**
  * A view that shows an individual deck.
@@ -12,6 +32,14 @@ class IndividualDeckView extends Component {
     static propTypes = {
         /** The deck object to be rendered. (Normally passed by navigation param.) */
         deck: PropTypes.object
+    }
+
+    _onAddCard() {
+        console.info('Add Card');
+    }
+
+    _onStartQuiz() {
+        console.info('Start Quiz');
     }
 
     render() {
@@ -27,8 +55,12 @@ class IndividualDeckView extends Component {
                 <Text  style={styles.subHeader}>
                     {questions.length} cards
                 </Text>
-                <Text>Add Card</Text>
-                <Text>Start Quiz</Text>
+            
+                <View style={styles.buttonContainer}>
+                    <AddCardButton onPress={this._onAddCard} />
+
+                    <StartQuizButton onPress={this._onStartQuiz} />
+                </View>
             </View>
         );
     }
@@ -63,6 +95,31 @@ const styles = StyleSheet.create({
         color: '#5f5f5f',
         fontSize: 20,
         fontStyle: 'italic'
+    },
+
+    buttonContainer: {
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        marginTop: 10
+    },
+
+    button: {
+        backgroundColor: 'orange',
+        marginTop: 5,
+        marginBottom: 5,
+        padding: 10,
+        paddingLeft: 30,
+        paddingRight: 30,
+        height: 45,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    buttonText: {
+        color: 'white',
+        fontSize: 22,
+        textAlign: 'center',
     }
 });
 
