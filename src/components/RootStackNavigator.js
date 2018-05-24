@@ -13,7 +13,8 @@ export default createStackNavigator(
     RootTabNavigator: {
         screen: RootTabNavigator,
         navigationOptions: {
-            title: 'Decks'
+            title: 'Decks',
+            header: null
         }
     },
 

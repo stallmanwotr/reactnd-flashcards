@@ -1,4 +1,6 @@
+import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
+import { EvilIcons, Feather, FontAwesome, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import NewDeckView from './views/NewDeckView';
 import DeckListView from './views/DeckListView';
 
@@ -10,18 +12,41 @@ export default createBottomTabNavigator(
     DeckListView: {
         screen: DeckListView,
         navigationOptions: {
-            title: 'Decks'
+            tabBarLabel: 'Decks',
+            tabBarIcon: ({ tintColor }) => (
+                <Feather name='layers' size={30} color={tintColor} />
+            )
         }
     },
 
     NewDeckView: {
         screen: NewDeckView,
         navigationOptions: {
-            title: 'Add Deck'
+            tabBarLabel: 'Add Deck',
+            tabBarIcon: ({ tintColor }) => (
+                <Feather name='plus-square' size={30} color={tintColor} />
+            )
         }
     }
 },
 {
-    initialRouteName: 'DeckListView'
+    initialRouteName: 'DeckListView',
+    navigationOptions: {
+        header: null
+    },
+    tabBarOptions: {
+        activeTintColor: 'orange',
+        style: {
+            height: 56,
+            backgroundColor: 'white',
+            shadowColor: 'rgba(0, 0, 0, 0.24)',
+            shadowOffset: {
+                width: 0,
+                height: 3
+            },
+            shadowRadius: 6,
+            shadowOpacity: 1
+        }
+    }
 });
 
