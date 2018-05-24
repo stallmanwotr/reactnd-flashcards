@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
 import * as TestData from './src/TestData';
-import RootTabNavigator from './src/components/RootTabNavigator';
+import RootStackNavigator from './src/components/RootStackNavigator';
 import store from './src/store';
 
 function AppStatusBar({backgroundColor, ...props}) {
@@ -26,7 +26,7 @@ export default class App extends React.Component {
             <Provider store={store} >
                 <View style={styles.container}>
                     <AppStatusBar backgroundColor={'orange'} barStyle="light-content" />
-                    <RootTabNavigator />
+                    <RootStackNavigator />
                 </View>
             </Provider>
         );

@@ -1,19 +1,19 @@
 import { createStackNavigator } from 'react-navigation';
-import DeckListView from './views/DeckListView';
 import IndividualDeckView from './views/IndividualDeckView';
 import NewCardView from './views/NewCardView';
 import NewDeckView from './views/NewDeckView';
 import QuizView from './views/QuizView';
+import RootTabNavigator from './RootTabNavigator';
 
 /**
  * A _StackNavigator_ that lets the user navigate between various deck views.
  */
 export default createStackNavigator(
 {
-    DeckListView: {
-        screen: DeckListView,
+    RootTabNavigator: {
+        screen: RootTabNavigator,
         navigationOptions: {
-            title: 'Flashcard Decks'
+            title: 'Decks'
         }
     },
 
@@ -52,5 +52,5 @@ export default createStackNavigator(
     }
 },
 {
-    initialRouteName: 'DeckListView'
+    initialRouteName: 'RootTabNavigator'
 });

@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from 'react-navigation';
 import NewDeckView from './views/NewDeckView';
-import RootStackNavigator from './RootStackNavigator';
+import DeckListView from './views/DeckListView';
 
 /**
  * A _TabNavigator_ that lets the user see all decks, or add a new deck.
  */
 export default createBottomTabNavigator(
 {
-    RootStackNavigator: {
-        screen: RootStackNavigator,
+    DeckListView: {
+        screen: DeckListView,
         navigationOptions: {
             title: 'Decks'
         }
@@ -22,6 +22,6 @@ export default createBottomTabNavigator(
     }
 },
 {
-    initialRouteName: 'RootStackNavigator'
+    initialRouteName: 'DeckListView'
 });
 
