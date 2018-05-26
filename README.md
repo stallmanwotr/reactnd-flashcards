@@ -43,6 +43,7 @@ in the _Building Projects with Native Code_ tab.
   virtual device).
 * There is some initial test data loaded (2 decks), to make testing easier. It wouldn't
   be included if the app was officially released.
+* Notifications are generated at 20:00 daily, if the user doesn't complete a quiz.
 
 ## Screenshots
 
