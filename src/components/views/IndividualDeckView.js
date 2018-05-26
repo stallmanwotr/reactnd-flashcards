@@ -68,6 +68,7 @@ class IndividualDeckView extends Component {
     render() {
         const { deck } = this.props;
         const { title, questions } = deck;
+        const cardCount = questions.length + ((questions.length === 1) ? ' card' : ' cards');
 
         return (
             <View style={styles.item}>
@@ -75,7 +76,7 @@ class IndividualDeckView extends Component {
                     {title}
                 </Text>
                 <Text  style={styles.subHeader}>
-                    {questions.length} cards
+                    {cardCount}
                 </Text>
             
                 <View style={styles.buttonContainer}>

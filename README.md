@@ -16,7 +16,7 @@ for mobile platforms (iOS and Android).
 This application requires that [Yarn](https://yarnpkg.com/) is installed, which provides
 the `yarn` package manager command.
 
-Next, install the application dependencies as follows:
+After installing `yarn`, install the application dependencies as follows:
 
 <pre>
     $ yarn install
@@ -29,22 +29,25 @@ And finally build and start the application itself:
 </pre>
 
 
-## Installing Expo or an Emulator
+## Installing Expo or a Simulator
 
 _Flashcards_ can run on a mobile device using the Expo app. This can be downloaded
 from the Google Play store (for Android) or the App Store (iOS).
 
 Alternatively, an Android or iOS simulator can be used. Follow the
-[instructions here](https://facebook.github.io/react-native/docs/getting-started.html),
+[instructions here](https://facebook.github.io/react-native/docs/getting-started.html)
 in the _Building Projects with Native Code_ tab.
 
 ## Notes:
 * The app has only been tested for Android by running in Android Stuido (a virtual Pixel 1
   device).
+* There is some initial test data loaded (2 decks). To make testing easier, it wouldn't
+  be included if the app was officially released.
 
 ## Screenshot
 
-![Screenshot 1](./screenshot1.png?raw=true)
+![Screenshot 1](./screenshot1.png?raw=true)a
+![Screenshot 2](./screenshot2.png?raw=true)
 
 ## License
 

@@ -46,6 +46,7 @@ class DeckListItem extends Component {
         const { deck } = this.props;
         const { title, questions } = deck;
         const { scaleAnim } = this.state;
+        const cardCount = questions.length + ((questions.length === 1) ? ' card' : ' cards');
 
         return (
             <TouchableOpacity
@@ -55,7 +56,7 @@ class DeckListItem extends Component {
                         {title}
                     </Animated.Text>
                     <Animated.Text style={[styles.subHeader, {transform: [{scale: scaleAnim}]} ]}>
-                        {questions.length} cards
+                        {cardCount}
                     </Animated.Text>
                 </View>
             </TouchableOpacity>
