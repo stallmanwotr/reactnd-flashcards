@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { clearNotificationForToday } from '../../utils/NotificationUtils';
 
 function ShowAnswerButton({ onPress }) {
     return (
@@ -85,7 +86,6 @@ class QuizView extends Component {
      */
     _onShowAnswer() {
         console.info('Show Answer');
-
         this.setState({
             showAnswer: true
         });
@@ -94,22 +94,34 @@ class QuizView extends Component {
     _onCorrectPress() {
         console.info('Correct Press');
         const { questionIndex, correctCount } = this.state;
+        const nextQuestionIndex = questionIndex+1;
 
         this.setState({
-            questionIndex: questionIndex+1,
+            questionIndex: nextQuestionIndex,
             showAnswer: false,
             correctCount: correctCount+1
         });
+
+        // if reached the end of the quiz.
+        if (nextQuestionIndex >= questions.length) {
+            clearNotificationForToday();
+        }
     }
 
     _onIncorrectPress() {
         console.info('Incorrect Press');
         const { questionIndex } = this.state;
+        const nextQuestionIndex = questionIndex+1;
 
         this.setState({
-            questionIndex: questionIndex+1,
+            questionIndex: nextQuestionIndex,
             showAnswer: false
         });
+
+        // if reached the end of the quiz.
+        if (nextQuestionIndex >= questions.length) {
+            clearNotificationForToday();
+        }
     }
 
     _onReturnToDeck() {

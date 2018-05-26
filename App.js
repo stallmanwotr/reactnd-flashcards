@@ -4,6 +4,7 @@ import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
 import * as TestData from './src/TestData';
 import RootStackNavigator from './src/components/RootStackNavigator';
+import { setupNotification } from './src/utils/NotificationUtils.js';
 import store from './src/store';
 
 function AppStatusBar({backgroundColor, ...props}) {
@@ -17,8 +18,13 @@ function AppStatusBar({backgroundColor, ...props}) {
 export default class App extends React.Component {
 
     componentDidMount() {
-        console.info('*** App.componentDidMount ***');
+        console.info('App.componentDidMount');
+
+        // TODO: remove me or improve intitial data.
         TestData.testFlashcardsAPI();
+
+        // set up a daily reminder to study.
+        setupNotification();
     }
 
     render() {
