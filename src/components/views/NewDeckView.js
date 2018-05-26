@@ -34,6 +34,12 @@ class NewDeckView extends Component {
         });
     }
 
+    componentWillReceiveProps() {
+        this.setState({
+            title: ''
+        });
+    }
+
     /**
      * The user confirms to create the new deck.
      */
@@ -41,6 +47,11 @@ class NewDeckView extends Component {
         const { title } = this.state;
         const { dispatch, navigation } = this.props;
         console.info(`Create new deck: ${title}`);
+
+        // ignore an invalid deck name.
+        if (!title || title.length === 0) {
+            return;
+        }
 
         // navigate back to the deck-list view.
         navigation.goBack();
@@ -55,6 +66,8 @@ class NewDeckView extends Component {
     }
 
     render() {
+        const { title } = this.state;
+
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>
@@ -66,6 +79,7 @@ class NewDeckView extends Component {
                         style={styles.input}
                         placeholder="Deck Title"
                         onChangeText={this._onChangeText.bind(this)}
+                        value={title}
                     />
                 </View>
 

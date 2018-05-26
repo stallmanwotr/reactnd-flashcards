@@ -13,12 +13,14 @@ function AddCardButton({ onPress }) {
     );
 }
 
-function StartQuizButton({ onPress }) {
+function StartQuizButton({ onPress, questionCount }) {
     return (
         <TouchableOpacity
-            style={[styles.button, styles.buttonQuiz]}
+            style={[styles.button,
+                    ((questionCount > 0) ? styles.buttonQuiz : styles.buttonInvalid)]}
             onPress={onPress} >
-            <Text style={[styles.buttonText, styles.buttonTextQuiz]}>
+            <Text style={[styles.buttonText,
+                          ((questionCount > 0) ? styles.buttonTextQuiz : styles.buttonTextInvalid)]}>
                 Start Quiz
             </Text>
         </TouchableOpacity>
@@ -61,6 +63,12 @@ class IndividualDeckView extends Component {
     _onStartQuiz() {
         console.info('Start Quiz');
         const { deck, navigation } = this.props;
+        const { questions } = deck;
+
+        // validate: don't start the quiz if no questions!
+        if (questions.length === 0) {
+            return;
+        }
 
         navigation.push('QuizView', { title: deck.title });
     }
@@ -82,7 +90,9 @@ class IndividualDeckView extends Component {
                 <View style={styles.buttonContainer}>
                     <AddCardButton onPress={this._onAddCard.bind(this)} />
 
-                    <StartQuizButton onPress={this._onStartQuiz.bind(this)} />
+                    <StartQuizButton
+                        onPress={this._onStartQuiz.bind(this)}
+                        questionCount={questions.length} />
                 </View>
             </View>
         );
@@ -159,6 +169,15 @@ const styles = StyleSheet.create({
 
     buttonTextQuiz: {
         color: 'orange'
+    },
+
+    buttonInvalid: {
+        backgroundColor: 'white',
+        borderColor: '#9f9f9f'
+    },
+
+    buttonTextInvalid: {
+        color: '#9f9f9f'
     }
 });
 
