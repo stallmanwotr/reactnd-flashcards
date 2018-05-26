@@ -85,13 +85,15 @@ const styles = StyleSheet.create({
 
     header: {
         color: '#000000',
-        fontSize: 24
+        fontSize: 24,
+        textAlign: 'center'
     },
 
     subHeader: {
         color: '#5f5f5f',
         fontSize: 20,
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        textAlign: 'center'
     }
 });
 

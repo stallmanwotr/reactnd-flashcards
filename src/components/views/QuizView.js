@@ -93,6 +93,7 @@ class QuizView extends Component {
 
     _onCorrectPress() {
         console.info('Correct Press');
+        const { deck } = this.props;
         const { questionIndex, correctCount } = this.state;
         const nextQuestionIndex = questionIndex+1;
 
@@ -103,13 +104,14 @@ class QuizView extends Component {
         });
 
         // if reached the end of the quiz.
-        if (nextQuestionIndex >= questions.length) {
+        if (nextQuestionIndex >= deck.questions.length) {
             clearNotificationForToday();
         }
     }
 
     _onIncorrectPress() {
         console.info('Incorrect Press');
+        const { deck } = this.props;
         const { questionIndex } = this.state;
         const nextQuestionIndex = questionIndex+1;
 
@@ -119,7 +121,7 @@ class QuizView extends Component {
         });
 
         // if reached the end of the quiz.
-        if (nextQuestionIndex >= questions.length) {
+        if (nextQuestionIndex >= deck.questions.length) {
             clearNotificationForToday();
         }
     }

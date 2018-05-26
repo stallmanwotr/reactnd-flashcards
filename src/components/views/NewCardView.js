@@ -71,20 +71,22 @@ class NewCardView extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>
-                    What is the title of your new card?
+                    Enter the card question and answer:
                 </Text>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Card Question"
-                    onChangeText={this._onChangeQuestion.bind(this)}
-                />
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Card Question"
+                        onChangeText={this._onChangeQuestion.bind(this)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Card Answer"
-                    onChangeText={this._onChangeAnswer.bind(this)}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Card Answer"
+                        onChangeText={this._onChangeAnswer.bind(this)}
+                    />
+                </View>
 
                 <SubmitButton onPress={this._onSubmit.bind(this)} />
             </View>
@@ -114,12 +116,20 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
 
+    inputContainer: {
+        marginBottom: 30,
+        marginTop: 30
+    },
+
     input: {
         fontSize: 22,
         color: '#404040',
-        borderWidth: 1,
-        borderColor: '#404040',
+        backgroundColor: '#f0f0f0',
+        borderWidth: 2,
+        borderColor: '#7a7a7a',
         borderRadius: 5,
+        marginBottom: 10,
+        marginTop: 10,
         padding: 10
     },
 
@@ -133,7 +143,8 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 5,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        alignSelf: 'center'
     },
 
     buttonText: {

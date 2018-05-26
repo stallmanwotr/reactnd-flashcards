@@ -20,7 +20,7 @@ export default class App extends React.Component {
     componentDidMount() {
         console.info('App.componentDidMount');
 
-        // TODO: remove me or improve intitial data.
+        // some intitial test-data.
         TestData.testFlashcardsAPI();
 
         // set up a daily reminder to study.

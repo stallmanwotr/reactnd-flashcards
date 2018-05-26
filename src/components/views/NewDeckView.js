@@ -9,7 +9,7 @@ function SubmitButton({ onPress }) {
         <TouchableOpacity
             style={styles.button}
             onPress={onPress} >
-            <Text style={styles.buttonText}>Submit</Text>
+            <Text style={styles.buttonText}>Create Deck</Text>
         </TouchableOpacity>
     );
 }
@@ -42,11 +42,16 @@ class NewDeckView extends Component {
         const { dispatch, navigation } = this.props;
         console.info(`Create new deck: ${title}`);
 
-        // add the new deck to the app state, and save to asyncstorage.
-        dispatch(createDeck(title));
-
-        // navigate back to the previous view (deck list).
+        // navigate back to the deck-list view.
         navigation.goBack();
+
+        // add the new deck to the app state, and save to asyncstorage.
+        dispatch(createDeck(title)).then(() => {
+            // after creating the deck in the app state, navigate to the
+            // individual deck view for the new deck.
+            console.info('*** Navigate to IndividualDeckView');
+            navigation.push('IndividualDeckView', { title });
+        });
     }
 
     render() {
@@ -56,11 +61,13 @@ class NewDeckView extends Component {
                     What is the title of your new deck?
                 </Text>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Deck Title"
-                    onChangeText={this._onChangeText.bind(this)}
-                />
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Deck Title"
+                        onChangeText={this._onChangeText.bind(this)}
+                    />
+                </View>
 
                 <SubmitButton onPress={this._onSubmit.bind(this)} />
             </View>
@@ -90,12 +97,20 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
 
+    inputContainer: {
+        marginBottom: 30,
+        marginTop: 30
+    },
+
     input: {
         fontSize: 22,
         color: '#404040',
-        borderWidth: 1,
-        borderColor: '#404040',
+        backgroundColor: '#f0f0f0',
+        borderWidth: 2,
+        borderColor: '#7a7a7a',
         borderRadius: 5,
+        marginBottom: 10,
+        marginTop: 10,
         padding: 10
     },
 
@@ -109,7 +124,8 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 5,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        alignSelf: 'center'
     },
 
     buttonText: {
