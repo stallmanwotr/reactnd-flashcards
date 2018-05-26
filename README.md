@@ -31,7 +31,7 @@ And finally build and start the application itself:
 
 ## Installing Expo or a Simulator
 
-_Flashcards_ can run on a mobile device using the Expo app. This can be downloaded
+_Flashcards_ can be run on a mobile device using the Expo app. This can be downloaded
 from the Google Play store (for Android) or the App Store (iOS).
 
 Alternatively, an Android or iOS simulator can be used. Follow the
@@ -39,12 +39,12 @@ Alternatively, an Android or iOS simulator can be used. Follow the
 in the _Building Projects with Native Code_ tab.
 
 ## Notes:
-* The app has only been tested for Android by running in Android Stuido (a virtual Pixel 1
-  device).
-* There is some initial test data loaded (2 decks). To make testing easier, it wouldn't
+* The app has only been tested for Android by running in Android Stuido (a Pixel 1
+  virtual device).
+* There is some initial test data loaded (2 decks), to make testing easier. It wouldn't
   be included if the app was officially released.
 
-## Screenshot
+## Screenshots
 
 ![Screenshot 1](./screenshot1.png?raw=true)a
 ![Screenshot 2](./screenshot2.png?raw=true)
