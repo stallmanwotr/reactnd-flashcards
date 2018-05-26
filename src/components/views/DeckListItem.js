@@ -28,10 +28,10 @@ class DeckListItem extends Component {
 
         // animate: slightly enlarge the text, then spring back to orginal size.
         Animated.sequence([
-            Animated.timing(scaleAnim, { toValue: 1.10, duration: 80}),
+            Animated.timing(scaleAnim, { toValue: 1.07, duration: 100}),
             // try to reduce the delay at the end of the spring:
             Animated.spring(scaleAnim, {
-                toValue: 1, friction: 7, overshootClamping: true, restSpeedThreshold: 0.05
+                toValue: 1, friction: 8, overshootClamping: true, restSpeedThreshold: 0.08
             })
         ])
         // called when the animation is complete.
