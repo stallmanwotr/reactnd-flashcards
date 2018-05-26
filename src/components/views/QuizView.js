@@ -7,9 +7,11 @@ import { clearNotificationForToday } from '../../utils/NotificationUtils';
 function ShowAnswerButton({ onPress }) {
     return (
         <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, styles.buttonShowAnswer]}
             onPress={onPress} >
-            <Text style={styles.buttonText}>Show Answer</Text>
+            <Text style={[styles.buttonText, styles.buttonTextShowAnswer]}>
+                Show Answer
+        </Text>
         </TouchableOpacity>
     );
 }
@@ -17,9 +19,11 @@ function ShowAnswerButton({ onPress }) {
 function CorrectButton({ onPress }) {
     return (
         <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, styles.buttonCorrect]}
             onPress={onPress} >
-            <Text style={styles.buttonText}>Correct</Text>
+            <Text style={[styles.buttonText, styles.buttonTextCorrect]}>
+                Correct
+            </Text>
         </TouchableOpacity>
     );
 }
@@ -27,9 +31,11 @@ function CorrectButton({ onPress }) {
 function IncorrectButton({ onPress }) {
     return (
         <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, styles.buttonIncorrect]}
             onPress={onPress} >
-            <Text style={styles.buttonText}>Incorrect</Text>
+            <Text style={[styles.buttonText, styles.buttonTextIncorrect]}>
+                Incorrect
+            </Text>
         </TouchableOpacity>
     );
 }
@@ -39,7 +45,21 @@ function ReturnToDeckButton({ onPress }) {
         <TouchableOpacity
             style={styles.button}
             onPress={onPress} >
-            <Text style={styles.buttonText}>Return to Deck</Text>
+            <Text style={styles.buttonText}>
+                Back to Deck
+            </Text>
+        </TouchableOpacity>
+    );
+}
+
+function RestartQuizButton({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={[styles.button, styles.buttonQuiz]}
+            onPress={onPress} >
+            <Text style={[styles.buttonText, styles.buttonTextQuiz]}>
+                Restart Quiz
+            </Text>
         </TouchableOpacity>
     );
 }
@@ -134,6 +154,20 @@ class QuizView extends Component {
         navigation.goBack();
     }
 
+    _onRestartQuiz() {
+        console.info('Restart Quiz.');
+        const { navigation } = this.props;
+        
+        // reset the state to zero for this quiz, which will cause this component
+        // to restart the quiz from the beginning.
+        //   rather than navigate by going back, then poping it back on again.
+        this.setState({
+            questionIndex: 0,
+            showAnswer: false,
+            correctCount: 0
+        });
+    }
+
     renderEndOfQuiz() {
         const { deck } = this.props;
         const { questions } = deck;
@@ -142,14 +176,18 @@ class QuizView extends Component {
         
         return (
             <View style={styles.container}>
-                <Text style={styles.subHeader}>
+                <Text style={styles.headerLine1}>
                     End of Quiz!
                 </Text>
-                <Text style={styles.subHeader}>
-                    {percent}%
+                <Text style={styles.headerLine2}>
+                    Score: {percent}%
                 </Text>
-                <ReturnToDeckButton onPress={this._onReturnToDeck.bind(this)} />
-            </View>
+
+                <View style={[styles.buttonContainer, {marginTop: 40}]}>
+                    <ReturnToDeckButton onPress={this._onReturnToDeck.bind(this)} />
+                    <RestartQuizButton onPress={this._onRestartQuiz.bind(this)} />
+                </View>
+        </View>
         );
     }
 
@@ -168,20 +206,25 @@ class QuizView extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.subHeader}>
-                    {questionIndex+1} / {questions.length}
+                    Question {questionIndex+1} / {questions.length}
                 </Text>
 
                 { (!showAnswer) ? (
-                    <View>
+                    <View style={styles.questionContainer}>
                         <Text style={styles.question}>
                             {card.question}
                         </Text>
                         <ShowAnswerButton onPress={this._onShowAnswer.bind(this)} />
                     </View>
                 ) : (
-                    <Text style={styles.question}>
-                        {card.answer}
-                    </Text>
+                    <View style={styles.answerContainer}>
+                        <Text style={styles.subHeader}>
+                            Answer:
+                        </Text>
+                        <Text style={styles.question}>
+                            {card.answer}
+                        </Text>
+                    </View>
                 )}
 
                 <View style={styles.buttonContainer}>
@@ -214,40 +257,105 @@ const styles = StyleSheet.create({
         },
     },
 
+    headerLine1: {
+        color: '#4f4f4f',
+        fontSize: 24,
+        fontStyle: 'italic',
+        textAlign: 'center'
+    },
+
+    headerLine2: {
+        color: '#1f1f1f',
+        fontSize: 24,
+        textAlign: 'center'
+    },
+
     subHeader: {
         color: '#5f5f5f',
         fontSize: 20,
         fontStyle: 'italic'
     },
 
+    questionContainer: {
+        marginTop: 10
+    },
+
+    answerContainer: {
+        marginTop: 10,
+        marginBottom: 30
+    },
+
     question: {
         color: '#000000',
-        fontSize: 24
+        fontSize: 24,
     },
 
     buttonContainer: {
         alignItems: 'stretch',
+        alignSelf: 'center',
         justifyContent: 'center',
         marginTop: 10
     },
 
     button: {
         backgroundColor: 'orange',
-        marginTop: 5,
+        borderColor: 'orange',
+        borderWidth: 2,
+        borderRadius: 5,
+        marginTop: 10,
         marginBottom: 5,
         padding: 10,
         paddingLeft: 30,
         paddingRight: 30,
         height: 45,
-        borderRadius: 5,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        alignSelf: 'stretch'
     },
 
     buttonText: {
         color: 'white',
         fontSize: 22,
-        textAlign: 'center',
+        textAlign: 'center'
+    },
+
+    buttonShowAnswer: {
+        alignSelf: 'center',
+        backgroundColor: '#e0e0e0',
+        borderColor: '#a0a0a0',
+        marginTop: 20,
+        marginBottom: 30
+    },
+
+    buttonTextShowAnswer: {
+        color: '#5f5f5f'
+    },
+
+    buttonCorrect: {
+        backgroundColor: '#3b9b33',
+        borderColor: '#3b9b33'
+    },
+
+    buttonTextCorrect: {
+        color: '#1f1f1f'
+    },
+
+    buttonIncorrect: {
+        backgroundColor: '#d32a2a',
+        borderColor: '#d32a2a'
+    },
+
+    buttonTextIncorrect: {
+        color: '#1f1f1f'
+    },
+
+    buttonQuiz: {
+        backgroundColor: 'white',
+        borderColor: 'orange'
+    },
+
+    buttonTextQuiz: {
+        color: 'orange'
     }
 });
 

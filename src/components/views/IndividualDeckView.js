@@ -16,9 +16,11 @@ function AddCardButton({ onPress }) {
 function StartQuizButton({ onPress }) {
     return (
         <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, styles.buttonQuiz]}
             onPress={onPress} >
-            <Text style={styles.buttonText}>Start Quiz</Text>
+            <Text style={[styles.buttonText, styles.buttonTextQuiz]}>
+                Start Quiz
+            </Text>
         </TouchableOpacity>
     );
 }
@@ -108,30 +110,37 @@ const styles = StyleSheet.create({
 
     header: {
         color: '#000000',
-        fontSize: 24
+        fontSize: 24,
+        textAlign: 'center'
     },
 
     subHeader: {
         color: '#5f5f5f',
-        fontSize: 20,
-        fontStyle: 'italic'
+        fontSize: 22,
+        fontStyle: 'italic',
+        marginBottom: 20,
+        marginTop: 10,
+        textAlign: 'center'
     },
 
     buttonContainer: {
         alignItems: 'stretch',
+        alignSelf: 'center',
         justifyContent: 'center',
         marginTop: 10
     },
 
     button: {
         backgroundColor: 'orange',
+        borderColor: 'orange',
+        borderWidth: 2,
+        borderRadius: 5,
+        height: 45,
         marginTop: 5,
         marginBottom: 5,
         padding: 10,
         paddingLeft: 30,
         paddingRight: 30,
-        height: 45,
-        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -140,6 +149,15 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 22,
         textAlign: 'center',
+    },
+
+    buttonQuiz: {
+        backgroundColor: 'white',
+        borderColor: 'orange'
+    },
+
+    buttonTextQuiz: {
+        color: 'orange'
     }
 });
 

@@ -5,6 +5,15 @@ import NewDeckView from './views/NewDeckView';
 import QuizView from './views/QuizView';
 import RootTabNavigator from './RootTabNavigator';
 
+const headerStyle = {
+    headerTintColor: '#4f4f4f',
+    headerStyle: {
+        backgroundColor: '#f0f0f0',
+        height: 35,
+        paddingBottom: 10
+    }
+};
+
 /**
  * A _StackNavigator_ that lets the user navigate between various deck views.
  */
@@ -23,7 +32,8 @@ export default createStackNavigator(
         navigationOptions: ({ navigation }) => {
             const { title } = navigation.state.params;
             return {
-                title: `Deck: ${title}`
+                title: `${title}`,
+                ...headerStyle
             };
         }
     },
@@ -31,14 +41,16 @@ export default createStackNavigator(
     NewDeckView: {
         screen: NewDeckView,
         navigationOptions: {
-            title: 'New Deck'
+            title: 'New Deck',
+            ...headerStyle
         }
     },
 
     NewCardView: {
         screen: NewCardView,
         navigationOptions: {
-            title: 'Add Card'
+            title: 'Add Card',
+            ...headerStyle
         }
     },
 
@@ -47,7 +59,8 @@ export default createStackNavigator(
         navigationOptions: ({ navigation }) => {
             const { title } = navigation.state.params;
             return {
-                title: `Quiz: ${title}`
+                title: `Quiz: ${title}`,
+                ...headerStyle
             };
         }
     }
