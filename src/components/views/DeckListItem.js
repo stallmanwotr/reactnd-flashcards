@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component} from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Animated, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import withPreventDoubleClick from '../common/withPreventDoubleClick';
 
 /**
  * Summary of an individual deck.
@@ -12,23 +13,50 @@ class DeckListItem extends Component {
         deck: PropTypes.object.isRequired,
 
         /** Handler: When the user selects this deck item. */
-        onPressItem: PropTypes.func
+        onPress: PropTypes.func
+    }
+
+    state = {
+        // animations: scale the deck text when clicked.
+        scaleAnim: new Animated.Value(1)
+    }
+
+    _onSelectDeck() {
+        const { deck, onPress } = this.props;
+        const { scaleAnim } = this.state;
+        console.info(`DeckListItem: Selected deck '${deck.title}'`);
+
+        // animate: slightly enlarge the text, then spring back to orginal size.
+        Animated.sequence([
+            Animated.timing(scaleAnim, { toValue: 1.10, duration: 80}),
+            // try to reduce the delay at the end of the spring:
+            Animated.spring(scaleAnim, {
+                toValue: 1, friction: 7, overshootClamping: true, restSpeedThreshold: 0.05
+            })
+        ])
+        // called when the animation is complete.
+        .start(() => {
+            console.info('DeckListItem: Animation finished');
+
+            if (onPress) { onPress(deck); }
+        });
     }
 
     render() {
-        const { deck, onPressItem } = this.props;
+        const { deck } = this.props;
         const { title, questions } = deck;
+        const { scaleAnim } = this.state;
 
         return (
             <TouchableOpacity
-                onPress={() => { if (onPressItem) { onPressItem(deck); }}} >
+                onPress={ this._onSelectDeck.bind(this) } >
                 <View style={styles.item}>
-                    <Text style={styles.header}>
+                    <Animated.Text style={[styles.header, {transform: [{scale: scaleAnim}]} ]}>
                         {title}
-                    </Text>
-                    <Text  style={styles.subHeader}>
+                    </Animated.Text>
+                    <Animated.Text style={[styles.subHeader, {transform: [{scale: scaleAnim}]} ]}>
                         {questions.length} cards
-                    </Text>
+                    </Animated.Text>
                 </View>
             </TouchableOpacity>
         );
@@ -67,4 +95,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DeckListItem;
+export default withPreventDoubleClick(DeckListItem);

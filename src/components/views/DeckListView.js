@@ -27,10 +27,10 @@ class DeckListView extends Component {
      * The user selects an individual deck, navigate to the individual deck view.
      */
     _onSelectDeck(deck) {
-        console.info('Select Deck');
         const { navigation } = this.props;
+        console.info(`Navigating to Deck: ${deck.title}`);
 
-        navigation.push('IndividualDeckView', { title: deck.title })
+        navigation.push('IndividualDeckView', { title: deck.title });
     }
 
     /*
@@ -52,7 +52,7 @@ class DeckListView extends Component {
             <View>
                 <DeckListItem
                     deck={item}
-                    onPressItem={this._onSelectDeck.bind(this)}
+                    onPress={this._onSelectDeck.bind(this)}
                 />
             </View>
         );
